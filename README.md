@@ -1,3 +1,3 @@
 # geoi
 
-Static website for the geoinsight design pattern.
+Static website describing the geoinsight design pattern.
