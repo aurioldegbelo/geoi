@@ -1,0 +1,224 @@
+PREFIX dbr: <http://dbpedia.org/resource/> 
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX geoi: <http://aurioldegbelo.github.io/geoi#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX wikidata:  <https://www.wikidata.org/wiki/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# QT: how many triples in the file
+SELECT (count(?a) as ?count)
+	WHERE { ?a ?b ?c }
+
+
+# QA: show existing statements about visualizations or their components
+SELECT DISTINCT ?statement ?note
+
+WHERE {  ?statement a geoi:ContentStatement .
+         ?statement geoi:asTextualDescription ?note.
+
+          {	?statement geoi:about ?x.
+          	?x a geoi:Geovisualization. }
+         
+          UNION
+          {
+          	 ?statement geoi:about ?x.
+          	 ?x a geoi:DataView.
+          }
+
+           UNION
+          {
+          	 ?statement geoi:about ?x.
+          	 ?x a geoi:ThematicLayer.
+          }
+
+
+  }
+
+
+ # QO: show existing statements about the visualization with the URL 'url'
+ SELECT DISTINCT ?statement ?note
+
+ WHERE {  
+		 ?statement a geoi:ContentStatement .
+         ?statement geoi:asTextualDescription ?note .
+
+         {
+         ?statement geoi:about ?geovis .
+         ?geovis a geoi:Geovisualization .
+         }
+		      UNION
+          {
+          	 ?statement geoi:about ?x .
+          	 ?x a geoi:DataView .
+          	 ?geovis geoi:shows ?x .
+          }
+
+           UNION
+          {
+          	 ?statement geoi:about ?x .
+          	 ?x a geoi:ThematicLayer .
+          	 ?geovis geoi:shows ?x .
+          }
+          
+         ?geovis dcterms:source ?source .
+         ?source dcterms:description "https://covid19.who.int/"^^xsd:string . 
+   
+  }
+
+  # QP: which content statements are most popular?
+ SELECT ?statement (count (distinct ?viewer) as ?recommendations)
+
+  WHERE
+  {
+  	?statement a geoi:ContentStatement .
+  	?statement geoi:endorsedBy ?viewer .
+  }
+  GROUP BY ?statement
+  ORDER BY desc(?recommendations)
+
+  # QR: what are most recent content statements about geoviz X?
+SELECT distinct ?statement  ?creationtime
+
+  WHERE
+  {
+  	?statement a geoi:ContentStatement .
+  	?statement dcterms:created ?creationtime .
+  	{?statement geoi:about geoi:geovis8 .}
+  	UNION
+    {
+    ?statement geoi:about ?x .
+    geoi:geovis8 geoi:shows ?x.
+    }
+  }
+  ORDER BY desc (?creationtime)
+
+  # Q1: what are content statements about topic T (e.g. Deforestation, Germany or Open Data)? => E1
+ SELECT ?statement ?note
+
+  WHERE
+  {
+  	?statement a geoi:ContentStatement .
+  	?statement geoi:asTextualDescription ?note .
+  	?statement dcterms:subject dbo:Deforestation .
+  }
+
+  # Q2: when does a given statement about Nordic countries apply? => E2
+  SELECT ?statement ?note ?temporalcoverage
+
+  WHERE
+  {
+  	?statement a geoi:ContentStatement .
+  	?statement geoi:asTextualDescription ?note .
+  	?statement dcterms:subject dbr:Nordic_countries .
+  	?statement	dcterms:temporal ?x .
+  	?x a geoi:TemporalRegion .
+  	?x dcterms:description ?temporalcoverage .
+  }
+
+  # Q3: what is the spatial coverage of statement S? => E3
+  SELECT ?note ?spatialcoverage
+
+  WHERE
+  {
+  	geoi:statement3 geoi:asTextualDescription ?note .
+  	geoi:statement3	dcterms:spatial ?x .
+  	?x a geoi:SpatialRegion .
+  	?x dcterms:description ?spatialcoverage .
+  }
+
+  # Q4: are there any outlier on geoviz G? => E4
+
+  ASK {
+		geoi:statement4 geoi:highlightsPattern ?x .
+		?x a geoi:Outlier .
+	 }
+
+	 # or 
+	SELECT ?outlier
+    WHERE {
+		geoi:statement4 geoi:highlightsPattern ?outlier .
+		?outlier a geoi:Outlier .
+	}
+
+
+# Q5: what are trends about a given country (i.e. Spain)?=> E5
+SELECT ?statement ?note
+    WHERE {
+    ?statement geoi:asTextualDescription ?note .
+			?statement dcterms:subject dbr:Spain .
+			?statement geoi:highlightsPattern ?trend .
+			?trend a geoi:Trend .
+	}
+
+# Q6: which features share similar traits on a given geovisualization (e.g. Minard Map)? => E6
+SELECT ?features ?note  ?statement
+    WHERE {
+    ?statement geoi:asTextualDescription ?note .
+    ?statement geoi:highlightsPattern ?cluster .
+		?cluster a geoi:Cluster .
+		?statement dcterms:subject ?features .
+	}
+  GROUP BY ?statement
+
+  # Q7: what do other users say about geovisualization G? => E7
+
+SELECT ?statement ?note ?creator
+WHERE 
+{
+    ?statement geoi:asTextualDescription ?note .
+    { ?statement geoi:about geoi:geovis7. }
+    UNION
+    { 
+      ?statement geoi:about ?x .
+      geoi:geovis7 geoi:shows ?x .
+    }
+    
+    ?statement geoi:createdBy ?creator .
+    FILTER (?creator != geoi:analyst71) 
+    
+	}
+
+
+  # Q7 (additional example): At which scale is the statement valid? => E7
+
+  SELECT ?note ?spatialcoverage
+  WHERE
+  {
+    geoi:statement71 geoi:asTextualDescription ?note .
+    geoi:statement71  dcterms:spatial ?x .
+    ?x a geoi:SpatialRegion .
+    ?x dcterms:description ?spatialcoverage .
+  }
+
+  # Q8: what are all patterns highlighed by a given geovisualization (e.g. covid dashboard)? => E8
+ SELECT distinct ?statement ?note ?pattern 
+ WHERE 
+    
+  {
+    ?statement geoi:asTextualDescription ?note .
+    {
+     ?statement geoi:about geoi:geovis8. 
+    }
+    UNION
+    { 
+      ?statement geoi:about ?x .
+      geoi:geovis8 geoi:shows ?x .
+    }
+    
+    ?statement geoi:highlightsPattern ?p .
+    	?p a ?pattern
+  }
+
+ # Q8 (additional example): what is the temporal coverage of a given statement ? => E8
+SELECT ?note ?temporalcoverage
+WHERE
+{ geoi:statement82 geoi:asTextualDescription ?note .
+  geoi:statement82  dcterms:temporal ?x .
+  ?x a geoi:TemporalRegion .
+  ?x dcterms:description ?temporalcoverage .
+}

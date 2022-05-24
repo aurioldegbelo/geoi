@@ -1,0 +1,492 @@
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix geoi: <http://aurioldegbelo.github.io/geoi#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix wikidata:  <https://www.wikidata.org/wiki/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+# A geovisualization has at least one dataview or one thematic layer
+geoi:Geovisualization a owl:Class ;  
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty geoi:shows ;
+                                        owl:someValuesFrom geoi:DataView
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty geoi:shows ;
+                                        owl:someValuesFrom geoi:ThematicLayer ]. 
+
+# A thematic layer has a least one data view
+geoi:ThematicLayer a owl:Class ;                
+                   rdfs:subClassOf [ a owl:Restriction ;
+                                     owl:onProperty geoi:hasComponent ;
+                                     owl:someValuesFrom geoi:DataView
+                                   ] .
+
+# A geovisualization shows a dataview or a thematic layer
+geoi:shows a owl:ObjectProperty ;   
+           rdfs:domain geoi:Geovisualization ;
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( geoi:DataView
+                                      geoi:ThematicLayer )] .
+
+
+# A statement can refer to a data view, a thematic layer or a geovisualization
+geoi:about a owl:ObjectProperty ;
+           rdfs:domain geoi:ContentStatement ;
+           rdfs:range [ a owl:Class ;
+                        owl:unionOf ( geoi:DataView
+                                      geoi:Geovisualization
+                                      geoi:ThematicLayer
+                                    )
+                      ] .
+
+
+### EXAMPLE 1: machine readable description for Picture: deforestation example
+
+geoi:statement1 a geoi:ContentStatement ;       
+   geoi:asTextualDescription " Brazilian Amazon Forest: a fishbone deforestation pattern"^^xsd:string;    
+   dcterms:created "2020-07-31T11:33:00Z  "^^xsd:dateTimeStamp ;          
+   geoi:asMachineReadableDescription geoi:statement1G ;
+   geoi:asGraphicalNote _:gnStatement1; 
+   geoi:highlightsPattern _:pattStatement1 ;
+   dcterms:spatial _:scItaituba ;
+   dcterms:temporal _:tcItaituba ;
+   geoi:createdBy geoi:analyst1 ;             
+   geoi:about geoi:geovis1 .
+
+_:gnStatement1 dcterms:description "https://eoimages.gsfc.nasa.gov/images/imagerecords/145000/145888/br163defores_tmo_amo_2019.gif"^^xsd:string .   
+
+_:pattStatement1  a geoi:DataPattern ; 
+    dcterms:description "A fishbone desforestation pattern"^^xsd:string .
+
+_:scItaituba a geoi:SpatialRegion; 
+    dcterms:description "Itaituba, Brazil"^^xsd:string .
+
+ _:tcItaituba a geoi:TemporalRegion;
+       dcterms:description "betwen 2000 and 2019"^^xsd:string .
+
+geoi:statement1G
+{
+  geoi:statement1 dcterms:subject dbr:Amazonia_Legal.
+  geoi:statement1 dcterms:subject dbo:Deforestation.
+}
+
+
+geoi:geovis1 a geoi:Geovisualization ;
+ geoi:shows _:dvAmazonPicture ;
+ dcterms:source _:sourceWebsiteAmazonBr .
+
+_:dvAmazonPicture a geoi:Chart .
+_:sourceWebsiteAmazonBr dcterms:description "https://earthobservatory.nasa.gov/images/145888/making-sense-of-amazon-deforestation-patterns"^^xsd:string .
+
+geoi:analyst1 a dcterms:Agent .
+
+
+
+### EXAMPLE 2: machine readable description for Picture: the web happiness map
+
+geoi:statement2 a geoi:ContentStatement;
+        dcterms:created "2020-06-10T22:05:00Z "^^xsd:dateTimeStamp ;
+        geoi:asMachineReadableDescription geoi:statement2G ;
+        geoi:asTextualDescription "Nordic nations seem the happiest. Switzerland, the only non-nordic country in the top 5"^^xsd:string ;
+        geoi:highlightsPattern _:pattStatement2 ;
+        dcterms:temporal _:tcHappiness ;
+        geoi:createdBy geoi:analyst2 ;
+        geoi:endorsedBy geoi:analyst3 ;
+        geoi:about geoi:geovis2 .
+
+_:pattStatement2  a geoi:Outlier, geoi:DataPattern .
+
+_:tcHappiness a geoi:TemporalRegion;
+         dcterms:description "2017"^^xsd:string .   
+
+geoi:statement2G
+{
+  geoi:statement2 dcterms:subject dbr:Switzerland.
+  dbr:Switzerland a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+
+  geoi:statement2 dcterms:subject dbr:Nordic_countries.
+  dbr:Nordic_countries a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+}
+
+
+geoi:geovis2 a geoi:Geovisualization  ;
+ geoi:shows _:dvHappinessMap ;
+ dcterms:source _:sourceWebsiteHappiness .
+
+_:dvHappinessMap a geoi:Map, geoi:DataView .
+_:sourceWebsiteHappiness dcterms:description "https://nation.maps.arcgis.com/apps/Cascade/index.html?appid=5a333512e79c4c5ab9052c9d0ff8f55b"^^xsd:string .
+
+geoi:analyst2 a dcterms:Agent .
+geoi:analyst3 a dcterms:Agent .
+
+
+### EXAMPLE 3: machine readable description for Table: 2G Mobile Coverage for Benin [SDG]
+
+geoi:statement3 a geoi:ContentStatement;
+    dcterms:created "2020-05-01T09:03:32Z "^^xsd:dateTimeStamp ;
+    geoi:asTextualDescription "Full mobile 2G coverage already achieved. A third of the population has access to 3G"^^xsd:string ;
+    geoi:asMachineReadableDescription geoi:statement3G ;
+    geoi:highlightsPattern _:pattStatement3 ;
+    dcterms:spatial  _:scBenin ;
+    dcterms:temporal _:tcBenin ;
+    geoi:about geoi:geovis3 ;
+    geoi:createdBy geoi:analyst31 ;
+    geoi:endorsedBy geoi:analyst32 ;
+    geoi:endorsedBy geoi:analyst33 ;
+    geoi:endorsedBy geoi:analyst34 .
+
+_:pattStatement3  a geoi:Frequency, geoi:DataPattern .
+
+_:scBenin a geoi:SpatialRegion ;
+     dcterms:description "Benin, West Africa"^^xsd:string .
+
+_:tcBenin a geoi:TemporalRegion;
+   dcterms:description "2014"^^xsd:string .
+
+geoi:statement3G
+{
+  geoi:statement3 dcterms:subject dbr:2G.
+  geoi:statement3 dcterms:subject dbr:3G.
+}
+
+
+geoi:geovis3 a geoi:Geovisualization ;
+ geoi:shows  _:dvTable2G ;
+ dcterms:source _:sourceWebsiteMobileCoverage ;
+ geoi:shows _:tlGoal9ResilientInfrastructure .
+
+_:tlGoal9ResilientInfrastructure a geoi:ThematicLayer ;
+     geoi:hasComponent _:dvTable2G .
+
+_:dvTable2G  a geoi:DataTable, geoi:DataView .
+
+_:sourceWebsiteMobileCoverage dcterms:description "https://benin.opendataforafrica.org/vtklyze/sustainable-development-goals-of-benin"^^xsd:string .
+
+
+geoi:analyst31 a dcterms:Agent .
+geoi:analyst32 a dcterms:Agent .
+geoi:analyst33 a dcterms:Agent .
+geoi:analyst34 a dcterms:Agent .
+
+
+
+### EXAMPLE 4:  machine readable description for Network: london tube map
+
+
+geoi:statement4 a geoi:ContentStatement ;
+    dcterms:created "2020-07-14T08:55:00Z "^^xsd:dateTimeStamp ;
+    geoi:asMachineReadableDescription geoi:statement4G ;
+    geoi:asTextualDescription "Shenfield outside fare zones"^^xsd:string ;
+    geoi:highlightsPattern _:pattStatement4 ;
+    dcterms:spatial _:scLondon ;
+    geoi:about geoi:geovis4 .
+
+_:pattStatement4  a geoi:Outlier, geoi:DataPattern .
+
+_:scLondon a geoi:SpatialRegion; 
+   dcterms:description "London, UK"^^xsd:string .
+   
+geoi:statement4G
+{
+  geoi:statement3 dcterms:subject dbr:Shenfield.
+  dbr:Shenfield a wikidata:Q486972, schema:Place, dbo:Settlement, dbo:PopulatedPlace, dbo:Place, dbo:Location.
+  geoi:statement3 dcterms:subject dbr:London_fare_zones.
+}
+
+
+geoi:geovis4 a geoi:Geovisualization ;
+ geoi:shows _:dvLondonTube ;
+ dcterms:source _:sourceWebsiteLondonTube .
+
+_:dvLondonTube a geoi:Chart .
+_:sourceWebsiteLondonTube  dcterms:description "https://tfl.gov.uk/maps/track/tube"^^xsd:string .
+
+
+
+
+### EXAMPLE 5: machine readable description for Chart: SDG for early leavers
+
+geoi:statement5 a geoi:ContentStatement;
+    dcterms:created "2020-08-02T10:20:10Z"^^xsd:dateTimeStamp ;
+    geoi:asTextualDescription "Early leavers from education and training are on the decrease. Biggest achievements for the past 20 years in Spain"^^xsd:string ;
+    geoi:asMachineReadableDescription geoi:statement5G ;
+    geoi:highlightsPattern _:pattStatement5 ;
+    geoi:about _:dvSDGLineCharts ;
+    dcterms:spatial _:scSDGExample ;
+    dcterms:temporal _:tcSDGExample ;
+    geoi:about geoi:geovis5 .
+
+_:pattStatement5  a geoi:Trend, geoi:DataPattern .
+
+_:scSDGExample a geoi:SpatialRegion ;
+        dcterms:description "Croatia, Germany, Spain, EU27"^^xsd:string .  
+                                       
+_:tcSDGExample a geoi:TemporalRegion ;
+    dcterms:description "2002-2019"^^xsd:string .
+
+geoi:statement5G
+{
+  geoi:statement5 dcterms:subject dbr:Spain.
+  dbr:Spain a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+}
+
+
+geoi:geovis5 a geoi:Geovisualization ;
+       geoi:shows _:dvSDGLineCharts ;
+       dcterms:source _:sourceWebsiteSDG .
+
+_:dvSDGLineCharts a geoi:Chart, geoi:DataView.
+
+_:sourceWebsiteSDG dcterms:description "https://ec.europa.eu/eurostat/cache/digpub/sdgs/index.html?country=HR&goal=SDG4&ind=1&chart=line"^^xsd:string .
+
+
+
+### EXAMPLE 6: machine readable description for Diagram: Minar's map
+
+geoi:statement6 a geoi:ContentStatement;
+    dcterms:created "2020-06-05T11:23:12Z"^^xsd:dateTimeStamp ;
+    geoi:asMachineReadableDescription geoi:statement6G ;
+    geoi:asTextualDescription "Huge loss (50.000+) between Gloubokoe and Vitebsk; big losses (30.000+) between Vitebsk and Smolensk, and around Vyazma"^^xsd:string ;
+    geoi:highlightsPattern _:pattStatement6 ;
+    geoi:about _:dvMinardMap ;
+    dcterms:spatial _:scMinardMap ;
+    dcterms:temporal _:tcMinardMap ;
+    geoi:createdBy geoi:analyst6 .
+
+_:pattStatement6  a geoi:Cluster, geoi:DataPattern .
+
+_:scMinardMap a geoi:SpatialRegion; 
+      dcterms:description "Russia"^^xsd:string .
+
+_:tcMinardMap a geoi:TemporalRegion;
+      dcterms:description "1812"^^xsd:string .
+
+
+geoi:statement6G
+{
+  geoi:statement6 dcterms:subject dbr:Vitebsk.
+  geoi:statement6 dcterms:subject dbr:Smolensk.
+  geoi:statement6 dcterms:subject dbr:Vyazma.
+  dbr:Vitebsk a wikidata:Q486972, schema:Place, dbo:Settlement, dbo:PopulatedPlace, dbo:Place, dbo:Location.
+  dbr:Smolensk a wikidata:Q486972, schema:Place, dbo:Settlement, dbo:PopulatedPlace, dbo:Place, dbo:Location.
+  dbr:Vyazma a wikidata:Q486972, schema:Place, dbo:Settlement, dbo:PopulatedPlace, dbo:Place, dbo:Location.
+
+}
+
+
+geoi:geovis6 a geoi:Geovisualization ;
+ geoi:shows _:dvMinardMap ;
+ dcterms:source _:sourceWebsiteMinardMap .
+
+_:dvMinardMap a geoi:Map, geoi:DataView .
+
+_:sourceWebsiteMinardMap  dcterms:description "https://en.wikipedia.org/wiki/French_invasion_of_Russia#/media/File:Minard.png"^^xsd:string .
+
+dcterms:analyst6 a dcterms:Agent .
+
+
+
+### EXAMPLE 7: machine readable description for Map (open data portals)
+
+# E7: statement71
+geoi:statement71 a geoi:ContentStatement;
+     dcterms:created "2020-08-03T15:03:20Z"^^xsd:dateTimeStamp ;
+     geoi:asMachineReadableDescription geoi:statement71G ;
+     geoi:asTextualDescription "No continent without open data portal. Europe and America have two-third of the share of available data portals"^^xsd:string ;
+     geoi:highlightsPattern _:pattStatement71;
+     geoi:createdBy geoi:analyst71 ;
+     geoi:about _:dvOpenDataPortalsMap ;
+     dcterms:temporal _:tcODPortals ;
+     dcterms:spatial _:scODPortalsZoom0 .
+
+_:pattStatement71  a geoi:Distribution, geoi:DataPattern .
+
+_:dvOpenDataPortalsMap a geoi:Map, geoi:DataView  .
+
+_:scODPortalsZoom0 a geoi:SpatialRegion ; 
+        dcterms:description "Zoom level 0"^^xsd:string .
+
+_:tcODPortals a geoi:TemporalRegion ;
+       dcterms:description "2020"^^xsd:string .
+
+
+geoi:statement71G
+{
+  geoi:statement71 dcterms:subject dbr:Open_data.
+  geoi:statement71 dcterms:subject dbr:Europe.
+  dbr:Europe a schema:Place, schema:Continent, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Continent.
+}
+
+
+
+
+# E7: statement72
+geoi:statement72 a geoi:ContentStatement ;
+     dcterms:created "2020-08-03T15:07:09Z"^^xsd:dateTimeStamp ;
+     geoi:asMachineReadableDescription geoi:statement72G ;
+     geoi:asTextualDescription "Spain alone has more data portals than France and Germany taken together"^^xsd:string ;
+     geoi:highlightsPattern _:pattStatement72 ;
+     geoi:about _:dvOpenDataPortalsMap ;
+     dcterms:spatial _:scODPortalsZoom2 ;
+     dcterms:temporal _:tcODPortals ;
+     geoi:endorsedBy geoi:analyst71 ;
+     geoi:createdBy geoi:analyst72 .
+
+_:pattStatement72  a geoi:Frequency, geoi:DataPattern .
+
+_:scODPortalsZoom2 a geoi:SpatialRegion ;
+   dcterms:description "Zoom level 2"^^xsd:string .
+
+geoi:statement72G
+{
+  geoi:statement72 dcterms:subject dbr:Spain.
+  geoi:statement72 dcterms:subject dbr:France.
+  geoi:statement72 dcterms:subject dbr:Germany.
+  dbr:Spain a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+  dbr:France a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+  dbr:Germany a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+}
+
+
+
+geoi:geovis7 a geoi:Geovisualization ;
+      dcterms:source _:sourceWebsiteOpenDataPortals ;
+      geoi:shows _:dvOpenDataPortalsMap .
+
+ _:sourceWebsiteOpenDataPortals  dcterms:description "https://opendatainception.io/"^^xsd:string .
+
+
+geoi:analyst71 a dcterms:Agent .
+geoi:analyst72 a dcterms:Agent .
+
+### EXAMPLE 8
+
+# E8: statement 81, machine readable description for Dashboard: covid map (choropleth view)
+geoi:statement81 a geoi:ContentStatement;
+     dcterms:created "2020-08-01T12:14:16Z"^^xsd:dateTimeStamp ;
+     geoi:asMachineReadableDescription geoi:statement81G ;
+     geoi:asTextualDescription "the countries most affected (million per population) in the Americas are the United States, Columbia, Peru, Brazil, Bolivia and Chile"^^xsd:string ;
+     geoi:highlightsPattern _:pattStatement81 ;
+     dcterms:spatial _:scCovidZoom1 ;
+     dcterms:temporal _:tcCovid ;
+     geoi:about _:tlCovidCases ;
+     geoi:createdBy geoi:analyst81 ;
+     geoi:endorsedBy geoi:analyst82 ,
+                     geoi:analyst83 ,
+                     geoi:analyst84 ,
+                     geoi:analyst85 ,
+                     geoi:analyst86 ,
+                     geoi:analyst87 .
+
+_:pattStatement81  a geoi:Cluster, geoi:DataPattern .
+
+_:scCovidZoom1 a geoi:SpatialRegion;  
+    dcterms:description "North and South America"^^xsd:string , "Zoom level 1"^^xsd:string .
+
+_:tcCovid a geoi:TemporalRegion ;
+       dcterms:description "July 31, 2020"^^xsd:string .
+
+_:tlCovidCases a geoi:ThematicLayer;
+    geoi:hasComponent _:dvCovidChoroplethMap .
+
+_:dvCovidChoroplethMap a geoi:Map, geoi:DataView.
+
+geoi:statement81G
+{
+  geoi:statement81 dcterms:subject dbr:Americas.
+  geoi:statement81 dcterms:subject dbr:United_States.
+  geoi:statement81 dcterms:subject dbr:Peru.
+  geoi:statement81 dcterms:subject dbr:Brazil.
+  geoi:statement81 dcterms:subject dbr:Bolivia.
+  geoi:statement81 dcterms:subject dbr:Chile.
+  dbr:Americas a schema:Place, schema:Continent, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Continent.
+  dbr:United_States a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+  dbr:Peru a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+  dbr:Brazil a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+  dbr:Bolivia a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+  dbr:Chile a wikidata:Q6256, schema:Place, schema:Country, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Country.
+
+}
+
+
+# E8: statement 82, machine readable description for Dashboard: covid map (table view)
+geoi:statement82 a geoi:ContentStatement ;
+     dcterms:created "2020-08-01T16:34:00Z"^^xsd:dateTimeStamp ;
+     geoi:asTextualDescription "Community transmission is the most frequent transmission mode in the Americas"^^xsd:string ;
+     geoi:asMachineReadableDescription  geoi:statement82G ;
+     geoi:highlightsPattern _:pattStatement82 ;
+     geoi:about _:dvCovidTable ;
+     dcterms:temporal _:tcCovid ;
+     dcterms:spatial _:scCovidTable;
+     geoi:about _:tlTransmissionClassification;
+     geoi:createdBy geoi:analyst81 .
+
+_:pattStatement82  a geoi:Frequency, geoi:DataPattern .
+
+_:scCovidTable a geoi:SpatialRegion;
+   dcterms:description "Americas"^^xsd:string .
+
+_:tlTransmissionClassification a geoi:ThematicLayer;
+      geoi:hasComponent _:dvCovidTable .
+
+_:dvCovidTable a geoi:DataTable, geoi:DataView.
+
+
+geoi:statement82G
+{
+  geoi:statement82 dcterms:subject dbr:Americas.
+  dbr:Americas a schema:Place, schema:Continent, dbo:PopulatedPlace, dbo:Place, dbo:Location, dbo:Continent.
+
+}
+
+
+# E8: statement 83, machine readable description for Dashboard: covid map (chart view)
+geoi:statement83 a geoi:ContentStatement ;
+     dcterms:created "2020-08-01T13:45:39Z"^^xsd:dateTimeStamp ;
+     geoi:asTextualDescription "Day with the lowest number of cases confirmed worldwide March 22"^^xsd:string ;
+     geoi:highlightsPattern _:pattStatement83 ;
+     dcterms:spatial _:scCovidChart ;
+     dcterms:temporal _:tcCovid ;
+     geoi:about _:tlCovidDeaths ;
+     geoi:createdBy geoi:analyst83 ;
+     geoi:endorsedBy geoi:analyst84 ,
+                     geoi:analyst85 ,
+                     geoi:analyst86 .
+
+_:pattStatement83  a geoi:Outlier, geoi:DataPattern .
+
+ _:scCovidChart a geoi:SpatialRegion ;
+     dcterms:description "Worldwide"^^xsd:string .
+
+
+_:tlCovidDeaths a geoi:ThematicLayer;
+    geoi:hasComponent _:dvCovidChart .
+
+_:dvCovidChart a geoi:Chart, geoi:DataView.
+
+
+geoi:geovis8 a geoi:Geovisualization  ;
+     geoi:shows _:dvCovidChart ,
+                _:dvCovidChoroplethMap ,
+                _:dvCovidTable ;
+     dcterms:source _:sourceWebsiteCovid ;
+     geoi:shows _:tlCovidCases ,
+                _:tlCovidDeaths ,
+                _:tlTransmissionClassification .
+
+_:sourceWebsiteCovid  dcterms:description "https://covid19.who.int/"^^xsd:string .
+
+geoi:analyst81 a dcterms:Agent .
+geoi:analyst82 a dcterms:Agent .
+geoi:analyst83 a dcterms:Agent .
+geoi:analyst84 a dcterms:Agent .
+geoi:analyst85 a dcterms:Agent .
+geoi:analyst86 a dcterms:Agent .
+geoi:analyst87 a dcterms:Agent .

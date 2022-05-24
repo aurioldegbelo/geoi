@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xml:lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      xmlns:owl="http://www.w3.org/2002/07/owl#"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+      xmlns:dcterms="http://purl.org/dc/terms/"
+      xmlns:dct="http://purl.org/dc/terms/"
+      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+      xmlns:prv="http://purl.org/net/provenance/ns#"
+>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="alternate" type="application/rdf+xml" href="geoi-20200810.owl" />
+  <link href="img/xmlns-style.css" rel="stylesheet" type="text/css" />
+  <link href="img/style.css" rel="stylesheet" type="text/css" />
+  <title>GeoInsight Content Design Pattern</title>
+</head>
+
+<body>
+<h1 about="" property="dcterms:title" xml:lang="en">GeoInsight Content Design Pattern</h1>
+<div about="" typeof="foaf:Document">
+
+<div property="rdfs:label" content="Document that defines the GeoInsight Content Design Pattern" xml:lang="en"></div>
+  <div rel="foaf:primaryTopic">
+    <div about="http://aurioldegbelo.github.io/geoi/ns#">
+      <div rel="rdf:type" resource="http://www.w3.org/2002/07/owl#Ontology"></div>
+      <div property="dcterms:title" content="GeoInsight Content Design Pattern" xml:lang="en"></div>
+      <div rel="prv:createdBy">
+	    <div rel="rdf:type" resource="http://purl.org/net/provenance/ns#DataCreation"></div>
+	    <div rel="prv:performedBy" resource="https://orcid.org/0000-0001-5087-8776"></div>
+	    <div property="prv:performedAt" content="2020-08-10T11:00:00Z" datatype="xsd:dateTime"></div>
+      </div>
+      <div rel="dcterms:creator" resource="https://orcid.org/0000-0001-5087-8776"></div>
+      <div property="dcterms:created" content="2020-08-10T11:00:00Z" datatype="xsd:dateTime"></div>
+     </div>
+   </div>
+</div>
+
+<h2>10 August 2020</h2>
+
+<dl>
+  <dt>This version:</dt>
+  <dd><a href="http://aurioldegbelo.github.io/geoi/ns-20200810">http://aurioldegbelo.github.io/geoi/ns-20200810</a></dd>
+  <dt>Latest version:</dt>
+  <dd><a href="http://aurioldegbelo.github.io/geoi/ns">http://aurioldegbelo.github.io/geoi/ns </a></dd>
+ <!-- <dd>Revision: 1.0</dd> -->
+  <dt>Authors:</dt>
+  <dd about="https://orcid.org/0000-0001-5087-8776" typeof="foaf:Person">
+    <a rel="foaf:homepage" href="https://sites.google.com/site/aurioldegbelo/" property="foaf:name">Auriol Degbelo</a>
+    (<a href="https://www.uni-muenster.de/Geoinformatics/en/">Institute for Geoinformatics, University of Münster, Germany</a>)
+    </dd>
+
+</dl>
+
+<p class="copyright">Copyright &copy; 2020 - 2020 Auriol Degbelo.</p>
+
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border: 0pt none; float: right;" src="img/cclogo.png" /></a>
+This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The license applies to the GeoInsight Design Pattern and accompanying documentation.</p>
+
+
+<p about=""
+     resource="http://www.w3.org/TR/rdfa-syntax"
+     rel="dc:conformsTo" xmlns:dc="http://purl.org/dc/terms/">
+    <a href="http://validator.w3.org/check?uri=referer"><img
+      src="http://www.w3.org/Icons/valid-xhtml-rdfa" alt="Valid XHTML + RDFa" height="31" width="88" /></a>
+  </p>
+
+  <p>This visual layout and structure of the specification was adapted from the <a href="http://rdfs.org/sioc/spec/">SIOC Core Ontology Specification</a> edited by Uldis Bojars and John G. Breslin and the <a href="http://trdf.sourceforge.net/provenance/ns.html">Provenance Vocabulary Core Ontology Specification</a> edited by Olaf Hartig and Jun Zhao.</p>
+
+<hr />
+
+<div>
+<h2 id="sec-abstract">Abstract</h2>
+
+<p>
+  <span about="http://aurioldegbelo.github.io/geoi#" property="dcterms:description">
+  The GeoInsight design pattern supports insight capture during interaction with geovisualizations. It models the when, what, who, how and scope of insight capture during an interaction session with a geovisualization. 
+  This document specifies the classes and properties introduced by the GeoInsight Design Pattern.
+  </span>
+</p>
+
+</div>
+<hr />
+
+<h2 id="sec-toc">Table of contents</h2>
+<ul>
+  <li><a href="#sec-glance">1. The GeoInsight Pattern at a glance</a></li>
+  <li><a href="#sec-vis">2. Visual Overview </a></li>
+  <li><a href="#sec-specification">3. Cross-reference for GeoInsight classes and properties</a></li>
+  <li><a href="#sec-examples">4. Example usage </a></li>
+  <li><a href="#sec-reference">5. References</a></li>
+  <li><a href="#sec-status">6. Document status</a></li>
+  <li><a href="#sec-changes">7. Change log</a></li>
+
+</ul>
+
+<hr />
+
+
+<!-- NEW SECTION -->
+<div class="glance">
+<h2 id="sec-glance">1. The GeoInsight Pattern at a glance </h2>
+
+<p>An alphabetical index of terms from the GeoInsight Pattern, by class and by property, is given below. All terms are hyperlinked to their detailed description for quick reference.</p>
+
+<div style="padding: 5px; border: dotted; background-color: #ddd;">
+<p>Classes: |
+  <a href="#Agent">Agent</a> |
+  <a href="#Chart">Chart</a> |
+  <a href="#Cluster">Cluster</a> |
+  <a href="#ContentStatement">ContentStatement</a> |
+  <a href="#Correlation">Correlation</a> |
+  <a href="#DataPattern">DataPattern</a> |
+  <a href="#DataTable">DataTable</a> |
+  <a href="#DataView">DataView</a> |
+  <a href="#Distribution">Distribution</a> |
+  <a href="#Frequency">Frequency</a> |
+  <a href="#Geovisualization">Geovisualization</a> |
+  <a href="#Map">Map</a> |
+  <a href="#Outlier">Outlier</a> |
+  <a href="#SpatialRegion">SpatialRegion</a> |
+  <a href="#TemporalRegion">TemporalRegion</a> |
+  <a href="#ThematicLayer">ThematicLayer</a> |
+  <a href="#Trend">Trend</a> |
+</p>
+
+<p>Properties: |
+  <a href="#about">about</a> |
+  <a href="#asGraphicalNote">asGraphicalNote</a> |
+  <a href="#asMachineReadableDescription">asMachineReadableDescription</a> |
+  <a href="#asTextualDescription">asTextualDescription</a> |
+  <a href="#createdBy">createdBy</a> |
+  <a href="#endorsedBy">endorsedBy</a> |
+  <a href="#hasComponent">hasComponent</a> |
+  <a href="#highlightsPattern">highlightsPattern</a> |
+  <a href="#shows">shows</a> |
+</p>
+</div>
+</div>
+
+<!-- NEW SECTION -->
+<div class="visualoverview">
+  <h2 id="sec-vis">2. Visual Overview</h2>
+
+
+  <p> The GeoInsight design pattern. It models the when (orange), what (rose), who (yellow), how (blue) and scope (green) of insight capture during an interaction session with a geovisualization. 
+    Terms in grey were reused from other content ontology design patterns ( <a href="http://ontologydesignpatterns.org/wiki/Submissions:TimeIndexedSituation">TimeIndexedSituation</a> and <a href="http://ontologydesignpatterns.org/wiki/Submissions:Information_realization">InformationRealization</a>).
+  </p>
+
+ The figure below shows a concept map of the design pattern.  
+  
+<div class="img">
+  <img src="img/cmap.svg" alt="Concept map of the GeoInsight Pattern" height="500" width="700"/>
+</div>
+
+The figure below shows types of data patterns accounted for by the GeoInsight Design pattern. Any statement that is not a data pattern is modelled as a <a href="https://www.w3.org/TR/vocab-ssn/#SOSAObservation">sosa:Observation</a>. 
+<div class="img">
+  <img src="img/content.svg" alt="Six possible types of higher-level statements" height="300" width="602"/>
+</div>
+
+</div>
+
+<!-- NEW SECTION -->
+<div class="overview">
+  <h2 id="sec-specification">3. Cross-reference for GeoInsight classes and properties</h2>
+</div>
+
+<!-- classes -->
+
+<div class="specterm" id="Agent"
+     about="http://aurioldegbelo.github.io/geoi#Agent" typeof="owl:Class">
+  <h3>Class: Agent</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Agent" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">An agent is an entity that acts on a geovisualization.
+</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Agent">http://aurioldegbelo.github.io/geoi#Agent</a></td></tr>
+
+    <tr>
+	<th>equivalent to:</th>
+	<td>
+	   <a href="#Agent">foaf:Agent</a><span rel="owl:equivalentClass" resource="http://xmlns.com/foaf/0.1/Agent"></span>
+     <a href="#Agent">dcterms:Agent</a><span rel="owl:equivalentClass" resource="http://purl.org/dc/terms/Agent"></span>
+
+	  </td>
+
+	</tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="Chart"
+     about="http://aurioldegbelo.github.io/geoi#Chart" typeof="owl:Class">
+  <h3>Class: Chart </h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Chart" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A data view that is neither a map nor a data table.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Chart">http://aurioldegbelo.github.io/geoi#Chart</a></td></tr>
+  <tr>
+	<th>subclass of:</th>
+	<td>	  
+	  <a href="#DataView">DataView</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataView"></span>
+	  </td>
+  </tr>
+  <tr>
+    <th>disjoint with:</th>
+    <td>
+      <a href="#DataTable">DataTable</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#DataTable"></span>
+      <a href="#Map">Map</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#Map"></span>
+      </td>
+    </tr>
+
+     </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+<div class="specterm" id="Cluster"
+     about="http://aurioldegbelo.github.io/geoi#Cluster" typeof="owl:Class">
+  <h3>Class: Cluster</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Cluster" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A cluster is a group of similar items.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Cluster">http://aurioldegbelo.github.io/geoi#Cluster</a></td></tr>
+  <tr>
+	<th>subclass of:</th>
+	<td>	  
+	  <a href="#DataPattern">DataPattern</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataPattern"></span>
+	  </td>
+	</tr>
+     </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+<div class="specterm" id="ContentStatement"
+     about="http://aurioldegbelo.github.io/geoi#ContentStatement" typeof="owl:Class">
+  <h3>Class: ContentStatement</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="ContentStatement" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en"> A statement that summarizes interesting facts portrayed by a geovisualization.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#ContentStatement">http://aurioldegbelo.github.io/geoi#ContentStatement</a></td></tr>
+    </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+
+<div class="specterm" id="Correlation"
+     about="http://aurioldegbelo.github.io/geoi#Correlation" typeof="owl:Class">
+  <h3>Class: Correlation</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Correlation" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A relationship between data dimensions.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Correlation">http://aurioldegbelo.github.io/geoi#Correlation</a></td></tr>
+      <tr>
+        <th>subclass of:</th>
+        <td>	  
+          <a href="#DataPattern">DataPattern</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataPattern"></span>
+          </td>
+        </tr>
+     </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+<div class="specterm" id="DataPattern"
+     about="http://aurioldegbelo.github.io/geoi#DataPattern" typeof="owl:Class">
+  <h3>Class: DataPattern</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="DataPattern" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A high-level characteristic that is highlighted by a geovisualization.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#DataPattern">http://aurioldegbelo.github.io/geoi#DataPattern</a></td></tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="DataTable"
+     about="http://aurioldegbelo.github.io/geoi#DataTable" typeof="owl:Class">
+  <h3>Class: DataTable </h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="DataTable" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A row-column view of the data.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#DataTable">http://aurioldegbelo.github.io/geoi#DataTable</a></td></tr>
+  <tr>
+	<th>subclass of:</th>
+	<td>	  
+	  <a href="#DataView">DataView</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataView"></span>
+	  </td>
+  </tr>
+  <tr>
+    <th>disjoint with:</th>
+    <td>
+      <a href="#Chart">Chart</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#Chart"></span>
+      <a href="#Map">Map</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#Map"></span>
+      </td>
+    </tr>
+     </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+
+<div class="specterm" id="DataView"
+     about="http://aurioldegbelo.github.io/geoi#DataView" typeof="owl:Class">
+  <h3>Class: DataView</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="DataView" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A perspective on a geographic dataset.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#DataView">http://aurioldegbelo.github.io/geoi#DataView</a></td></tr>
+        <tr>
+        <th>disjoint with:</th>
+        <td>
+          <a href="#Geovisualization">Geovisualization</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#Geovisualization"></span>
+          <a href="#ThematicLayer">ThematicLayer</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#ThematicLayer"></span>
+          </td>
+        </tr> 
+       </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="Distribution"
+     about="http://aurioldegbelo.github.io/geoi#Distribution" typeof="owl:Class">
+  <h3>Class: Distribution</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Distribution" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">The extent and frequency of items.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Distribution">http://aurioldegbelo.github.io/geoi#Distribution</a></td></tr>
+        <tr>
+          <th>subclass of:</th>
+          <td>	  
+            <a href="#DataPattern">DataPattern</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataPattern"></span>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="Frequency"
+     about="http://aurioldegbelo.github.io/geoi#Frequency" typeof="owl:Class">
+  <h3>Class: Frequency</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Frequency" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">How often items appear.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Frequency">http://aurioldegbelo.github.io/geoi#Frequency</a></td></tr>
+      <tr>
+        <th>subclass of:</th>
+        <td>	  
+          <a href="#DataPattern">DataPattern</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataPattern"></span>
+          </td>
+        </tr> 
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="Geovisualization"
+     about="http://aurioldegbelo.github.io/geoi#Geovisualization" typeof="owl:Class">
+  <h3>Class: Geovisualization</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Geovisualization" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en"> An artifact whose visual properties encode geographic data.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Geovisualization">http://aurioldegbelo.github.io/geoi#Geovisualization</a></td></tr>
+      <tr>
+      <th>disjoint with:</th>
+        <td>
+          <a href="#DataView">DataView</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#DataView"></span>
+          <a href="#ThematicLayer">ThematicLayer</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#ThematicLayer"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+<div class="specterm" id="Map"
+     about="http://aurioldegbelo.github.io/geoi#Map" typeof="owl:Class">
+  <h3>Class: Map </h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Map" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A data view that maintains spatial relationships explicitly. Maps maintain the direct association between the physical space and the represented space.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Map">http://aurioldegbelo.github.io/geoi#Map</a></td></tr>
+  <tr>
+	<th>subclass of:</th>
+	<td>	  
+	  <a href="#DataView">DataView</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataView"></span>
+	  </td>
+  </tr>
+  <tr>
+    <th>disjoint with:</th>
+    <td>
+      <a href="#Chart">Chart</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#Chart"></span>
+      <a href="#DataTable">DataTable</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#DataTable"></span>
+      </td>
+    </tr>
+     </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+<div class="specterm" id="Outlier"
+     about="http://aurioldegbelo.github.io/geoi#Outlier" typeof="owl:Class">
+  <h3>Class: Outlier</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Outlier" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">An item that does not match a distribution.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Outlier">http://aurioldegbelo.github.io/geoi#Outlier</a></td></tr>
+          <tr>
+          <th>subclass of:</th>
+          <td>	  
+            <a href="#DataPattern">DataPattern</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataPattern"></span>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="SpatialRegion"
+     about="http://aurioldegbelo.github.io/geoi#SpatialRegion" typeof="owl:Class">
+  <h3>Class: SpatialRegion</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="SpatialRegion" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A region of space. It may be specifed precisely (e.g. using geometries or a zoom level of a map), or vaguely (using a place name).</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#SpatialRegion">http://aurioldegbelo.github.io/geoi#SpatialRegion</a></td></tr>
+        <tr>
+        <th>disjoint with:</th>
+        <td>
+          <a href="#TemporalRegion">TemporalRegion</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#TemporalRegion"></span>
+          </td>
+        </tr>
+       </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="TemporalRegion"
+     about="http://aurioldegbelo.github.io/geoi#TemporalRegion" typeof="owl:Class">
+  <h3>Class: TemporalRegion</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="TemporalRegion" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A region of time. It may be specified precisely using a timestamp/time interval or vaguely using a temporal description in natural language.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#TemporalRegion">http://aurioldegbelo.github.io/geoi#TemporalRegion</a></td></tr>
+        <tr>
+          <th>disjoint with:</th>
+          <td>
+            <a href="#SpatialRegion">SpatialRegion</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#SpatialRegion"></span>
+            </td>
+          </tr>
+       </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="ThematicLayer"
+     about="http://aurioldegbelo.github.io/geoi#ThematicLayer" typeof="owl:Class">
+  <h3>Class: ThematicLayer</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="ThematicLayer" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A group of features that belong to the same class.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#ThematicLayer">http://aurioldegbelo.github.io/geoi#ThematicLayer</a></td></tr>
+        <tr>
+          <th>disjoint with:</th>
+          <td>
+            <a href="#DataView">DataView</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#DataView"></span>
+            <a href="#Geovisualization">Geovisualization</a><span rel="owl:disjointWith" resource="http://aurioldegbelo.github.io/geoi#Geovisualization"></span>
+            </td>
+          </tr>
+       </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="Trend"
+     about="http://aurioldegbelo.github.io/geoi#Trend" typeof="owl:Class">
+  <h3>Class: Trend</h3>
+
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="Trend" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">A high-level change across a data dimension.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#Trend">http://aurioldegbelo.github.io/geoi#Trend</a></td></tr>
+        <tr>
+          <th>subclass of:</th>
+          <td>	  
+            <a href="#DataPattern">DataPattern</a><span rel="rdfs:subClassOf" resource="http://aurioldegbelo.github.io/geoi#DataPattern"></span>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+
+<!-- properties -->
+
+
+<div class="specterm" id="about"
+     about="http://aurioldegbelo.github.io/geoi#about" typeof="owl:ObjectProperty">
+
+  <h3>Property: about</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="about" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">about is an abstract property to express the referent of a content statement (either a dataview, a geovisualization or a thematic layer)).</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#about">http://aurioldegbelo.github.io/geoi#about</a></td></tr>
+      <tr><th>OWL Type:</th><td>ObjectProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#ContentStatement">ContentStatement</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#ContentStatement"></div></td>
+	  </tr>
+      <tr>
+	  <th>Range:</th>
+    <td>
+    <a href="#Geovisualization">Geovisualization</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#Geovisualization"></span> or
+    <a href="#ThematicLayer">ThematicLayer</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#ThematicLayer"></span> or
+    <a href="#DataView">DataView</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#DataView"></span>
+    </td>
+	  </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+
+
+<div class="specterm" id="asGraphicalNote"
+     about="http://aurioldegbelo.github.io/geoi#asGraphicalNote" typeof="owl:ObjectProperty">
+
+  <h3>Property: asGraphicalNote</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="asGraphicalNote" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">asGraphicalNote helps to specify a graphical note made by a user on a geovisualization. The note may be specified as a literal (e.g. a url pointing at the original geovisualization) or as an object of a triple.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#asGraphicalNote">http://aurioldegbelo.github.io/geoi#asGraphicalNote</a></td></tr>
+      <tr><th>OWL Type:</th><td>ObjectProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#ContentStatement">ContentStatement</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#ContentStatement"></div></td>
+	  </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+
+
+<div class="specterm" id="asMachineReadableDescription"
+     about="http://aurioldegbelo.github.io/geoi#asMachineReadableDescription" typeof="owl:ObjectProperty">
+
+  <h3>Property: asMachineReadableDescription</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="asMachineReadableDescription" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">asMachineReadableDescription helps to specify the machine readable description (RDF) of a content statement. The machine readable description is preferably a named graph.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#asMachineReadableDescription">http://aurioldegbelo.github.io/geoi#asMachineReadableDescription</a></td></tr>
+      <tr><th>OWL Type:</th><td>ObjectProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#ContentStatement">ContentStatement</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#ContentStatement"></div></td>
+	  </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="asTextualDescription"
+     about="http://aurioldegbelo.github.io/geoi#asTextualDescription" typeof="owl:DatatypeProperty">
+  <h3>Property: asTextualDescription</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="asTextualDescription" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">asTextualDescription helps to specify the textual description of a content statement.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#asTextualDescription">http://aurioldegbelo.github.io/geoi#asTextualDescription</a></td></tr>
+      <tr><th>OWL Type:</th><td>owl:DatatypeProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#ContentStatement">ContentStatement</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#ContentStatement"></div></td>
+  </tr>
+  <tr>
+    <th>Range:</th>
+    <td>
+    <a href="http://www.w3.org/2001/XMLSchema#String">xsd:String</a><span rel="rdfs:range" resource="http://www.w3.org/2001/XMLSchema#String"></span>
+      </td>
+    </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+<div class="specterm" id="createdBy"
+     about="http://aurioldegbelo.github.io/geoi#createdBy" typeof="owl:ObjectProperty">
+<h3>Property: createdBy</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="createdBy" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">createdBy is a property that relates a content statement to the agent that created it.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#createdBy">http://aurioldegbelo.github.io/geoi#createdBy</a></td></tr>
+      <tr><th>OWL Type:</th><td>ObjectProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#ContentStatement">ContentStatement</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#ContentStatement"></div></td>
+	  </tr>
+      <tr>
+	  <th>Range:</th>
+    <td>
+    <a href="#Agent">Agent</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#Agent"></span> 
+    </td>
+	  </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+
+
+<div class="specterm" id="endorsedBy"
+     about="http://aurioldegbelo.github.io/geoi#endorsedBy" typeof="owl:ObjectProperty">
+<h3>Property: endorsedBy</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="endorsedBy" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">endorsedBy is a property that relates a content statement to an agent that endorsed (i.e. recommended) it.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#endorsedBy">http://aurioldegbelo.github.io/geoi#endorsedBy</a></td></tr>
+      <tr><th>OWL Type:</th><td>ObjectProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#ContentStatement">ContentStatement</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#ContentStatement"></div></td>
+	  </tr>
+      <tr>
+	  <th>Range:</th>
+    <td>
+    <a href="#Agent">Agent</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#Agent"></span> 
+    </td>
+	  </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+  
+
+<div class="specterm" id="hasComponent"
+     about="http://aurioldegbelo.github.io/geoi#hasComponent" typeof="owl:ObjectProperty">
+<h3>Property: hasComponent</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="hasComponent" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">hasComponent is a property that relates a thematic layer to dataviews (map, chart, data table) that are part of it.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#hasComponent">http://aurioldegbelo.github.io/geoi#hasComponent</a></td></tr>
+      <tr><th>OWL Type:</th><td>ObjectProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#ThematicLayer">ThematicLayer</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#ThematicLayer"></div></td>
+	  </tr>
+      <tr>
+	  <th>Range:</th>
+    <td>
+    <a href="#DataView">DataView</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#DataView"></span> 
+    </td>
+	  </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+ 
+
+<div class="specterm" id="highlightsPattern"
+     about="http://aurioldegbelo.github.io/geoi#highlightsPattern" typeof="owl:ObjectProperty">
+<h3>Property: highlightsPattern</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="highlightsPattern" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">highlightsPattern is a property that relates a content statement to a data pattern that it highlights.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#highlightsPattern">http://aurioldegbelo.github.io/geoi#highlightsPattern</a></td></tr>
+      <tr><th>OWL Type:</th><td>ObjectProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#ContentStatement">ContentStatement</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#ContentStatement"></div></td>
+	  </tr>
+      <tr>
+	  <th>Range:</th>
+    <td>
+    <a href="#DataPattern">DataPattern</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#DataPattern"></span> 
+    </td>
+	  </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+  
+  
+  
+<div class="specterm" id="shows"
+     about="http://aurioldegbelo.github.io/geoi#shows" typeof="owl:ObjectProperty">
+<h3>Property: shows</h3>
+  <div rel="rdfs:isDefinedBy" resource="http://aurioldegbelo.github.io/geoi"></div>
+  <div property="rdfs:label" content="shows" xml:lang="en"></div>
+  <p class="TermComment" property="rdfs:comment" xml:lang="en">shows is a property that relates a geovisualization to one of the perspectives on a dataset it offers.</p>
+  <table style="th { float: top; }">
+    <tbody>
+      <tr><th>Identifier:</th><td><a href="http://aurioldegbelo.github.io/geoi#shows">http://aurioldegbelo.github.io/geoi#shows</a></td></tr>
+      <tr><th>OWL Type:</th><td>ObjectProperty</td></tr>
+      <tr><th>Domain:</th>
+	  <td><a href="#Geovisualization">Geovisualization</a><div rel="rdfs:domain" resource="http://aurioldegbelo.github.io/geoi#Geovisualization"></div></td>
+	  </tr>
+      <tr>
+	  <th>Range:</th>
+    <td>
+      <a href="#ThematicLayer">ThematicLayer</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#ThematicLayer"></span> or
+      <a href="#DataView">DataView</a><span rel="rdfs:range" resource="http://aurioldegbelo.github.io/geoi#DataView"></span>
+       </td>
+	  </tr>
+      </tbody>
+    </table>
+  <p style="float: right; font-size: small;">[<a href="#sec-glance">back to overview</a>]</p>
+  <br/>
+</div>
+
+  
+  
+  
+
+
+  
+  
+
+ 
+<!-- NEW SECTION --> 
+<h2 id="sec-examples">4. Example usage</h2>
+<div>
+To illustrate the expressiveness of the pattern, the following examples of online geovisualizations were used.
+
+<ul>
+  <li id="ref-covid"> A dashboard visualization of the COVID-19 pandemic by the World Health Organization: <a href="https://covid19.who.int/">https://covid19.who.int/</a> </li>
+  <li id="ref-happiness"> A map of the world's happiness: <a href="https://nation.maps.arcgis.com/apps/Cascade/index.html?appid=5a333512e79c4c5ab9052c9d0ff8f55b">https://nation.maps.arcgis.com/apps/Cascade/index.html?appid=5a333512e79c4c5ab9052c9d0ff8f55b</a> </li>
+  <li id="ref-opendata"> An overview map of open data portals worldwide: <a href="https://opendatainception.io/">https://opendatainception.io/</a> </li>
+  <li id="ref-mobile"> Data table of sustainable development goal indicator data (category: resilient infrastructure): <a href="https://benin.opendataforafrica.org/vtklyze/sustainable-development-goals-of-benin">https://benin.opendataforafrica.org/vtklyze/sustainable-development-goals-of-benin</a> </li>
+  <li id="ref-education"> Line charts of sustainable development goal indicator data (category: quality education): <a href="https://ec.europa.eu/eurostat/cache/digpub/sdgs/index.html?country=HR&amp;goal=SDG4&amp;ind=1&amp;chart=line">https://ec.europa.eu/eurostat/cache/digpub/sdgs/index.html?country=HR&amp;goal=SDG4&amp;ind=1&amp;chart=line</a> </li>
+  <li id="ref-minar"> Minard's map: <a href="https://en.wikipedia.org/w/index.php?title=File:Minard.png&amp;oldid=216282037">https://en.wikipedia.org/w/index.php?title=File:Minard.png&amp;oldid=216282037</a> </li>
+  <li id="ref-london"> London Tube:  <a href="https://tfl.gov.uk/maps/track/tube">https://tfl.gov.uk/maps/track/tube</a> </li>
+  <li id="ref-amazon"> Picture of the Amazon Deforestation: <a href="https://earthobservatory.nasa.gov/images/145888/making-sense-of-amazon-deforestation-patterns">https://earthobservatory.nasa.gov/images/145888/making-sense-of-amazon-deforestation-patterns</a> </li>
+ </ul>
+
+<p>All links were last accessed on August 07, 2020. Examplar RDF statements (turtle) for these geovisualizations, as well as SPARQL queries can be <a href="demoexamples.zip">downloaded</a> or found online <a href=" https://github.com/aurioldegbelo/aurioldegbelo.github.io/tree/master/geoi/ns/demoexamples">here</a></p>
+</div>
+ 
+<!-- NEW SECTION --> 
+<h2 id="sec-reference">5. References</h2>
+
+<ul>
+  <li id="ref-dcterms"> dcterms: <a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a> [several terms from dcterms such as dcterms:created, dcterms:description, dcterms:source, dcterms:spatial, dcterms:temporal were used while annotating the examples above] </li>
+ </ul>
+ <ul>
+  <li id="ref-geoi"> geoi: the OWL file for the GeoInsight design pattern can be downloaded <a href="demoexamples.zip">here</a> </li>
+ </ul>
+ <ul>
+  <li id="ref-wop-paper"> The paper presented at the <a href="http://ontologydesignpatterns.org/wiki/WOP:2020">11th Workshop on Ontology Design and Patterns</a> (WOP@ISWC2020) is available <a href="https://www.researchgate.net/publication/345347764_An_Ontology_Design_Pattern_for_Geovisualization_Content_Description">here</a>. To see the talk at WOP2020, click <a href="https://youtu.be/DOWSp6D9zQI">here</a> </li>
+ </ul>
+
+
+
+<!-- NEW SECTION -->
+<div class="status">
+  <h2 id="sec-status">6. Document status</h2>
+  
+  <p>This specification is a  <a href="https://en.wikipedia.org/wiki/Living_document">living document</a>. It may be updated or amended based on implementation experience, but no commitment is made by the author regarding future updates. </p>
+  </div> 
+
+ <!-- NEW SECTION -->
+<h2 id="sec-changes">7. Change log</h2>
+<ul>
+  <li>2020-11-05: Link to the paper and talk at the Workshop on Ontology Design Pattern added.</li>        
+  <li>2020-08-10: Initial (non-peer reviewed) version online.</li>        
+</ul>
+
+ 
+</body>
+</html>
+
